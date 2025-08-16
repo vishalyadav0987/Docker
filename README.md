@@ -18,7 +18,7 @@ writing image sha256:163c56b07d4b80c15ed9025c276c3114df01d2fffba887ae
 ```
 docker image ls
 ```
-- **Result**
+- **Result ✅**
 
 | REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
 |--------------|-------------|--------------|-------------|------------|
@@ -30,7 +30,7 @@ docker image ls
 docker run <imageId>
 ```
 
-- **Result**
+- **Result ☑️**
 ```
 testapp@0.0.0 dev
 > vite
@@ -78,7 +78,7 @@ docker run -p <which PORT>:<Expose PORT> <imageId>
 ```
 docker ps
 ```
-- **Result**
+- **Result ✅**
 
 | CONTAINER ID | IMAGE ID | COMMAND | CREATED | STATUS | PORTS | NAMES |
 |--------------|-------------|--------------|-------------|------------|------------|------------|
@@ -100,6 +100,56 @@ docker stop <NAMES>
 docker run -d -p 5173:5173 <imageId>
 ```
 
+- **Result ✅**
+```
+d81c1717adc694f40297e43bd9adfdd14467048926d09387f88955f2546b0d13
+```
+
+
 ---
 
+### 🏃 Running Mutiple Container/Application with single Image:
+**My Container 1 Running PORT At 5173 And We Listen on Machine 5173**
+- **When we listen again same PORT:**
+```
+docker run -d -p 5173:5173 b82aff127418
+```
+- **Result ❌**
+```
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint admiring_raman (9bfbe510fc2f1fc47a8116fd8bf3c7d5b662a82e5e21a2e16bf7f4573710c37f): Bind for 0.0.0.0:5173 failed: port is already allocated
 
+Run 'docker run --help' for more information
+
+NOTE: These response in you PC alread PORT 5173 in used.
+```
+
+- **(Question) So how we create mutiple container with same image ?**
+- **(Answer) We run the Container 2 PORT At 5173 And We Listen on Machine with (Differet PORT) 3000**
+
+**Container 2**
+```
+docker run -d -p 3000:5173 b82aff127418
+```
+- **Result ✅**
+```
+912bf56e56e49ee77f34d7ea5a4810f36a74661d86903978521ef5744a03bec7
+```
+
+**Container 3**
+```
+docker run -d -p 4000:5173 b82aff127418
+```
+- **Result ✅**
+```
+1b000d819425de59be94a8e125b2e5f0fc50792ccb824ced09801a1b2b0d7c6d
+```
+
+---
+
+### 🐳 Here we come to the advantages of DOCKER and the proof that every container has an isolated env:
+- We can run multiple containers from a single image.
+- Here we also say that **container 1**, **container 2**, **container 3** run on same port that **is not possible if container is not isolated Environment.**.
+- For example, **Container 1**, **Container 2**, and **Container 3** **can run independently**. **They cannot use the same port on the same host, but because containers are isolated environments**, they can still run without conflict (by mapping to different host ports).
+- Running multiple containers from the same image can also help in **load balancing** for websites.
+
+---
