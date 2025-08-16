@@ -35,7 +35,7 @@ EXPOSE 3000
 
 
 
-CMD ["npm","install"]
+CMD ["npm","run","dev"]
 # We here only create docker so not direct run the npm i command
 # That why we are using CMD [ "executable" ] executable tool
 
