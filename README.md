@@ -44,11 +44,11 @@ testapp@0.0.0 dev
 This site can’t be reached
 ```
 
-- **(Question)** Why these **This site can’t be reached** the message show when we going to **http://localhost:3000** that **Expose 3000** is assign in docker file?
+- **(Question)** Why these **This site can’t be reached** the message show when we going to **http://localhost:5173** that **Expose 5173** is assign in docker file?
 
 
-- **(Answer)** This error occurs because Docker containers run in an isolated environment. In the Dockerfile, `EXPOSE 3000` only informs that the application inside the container will use port 3000, but it does not automatically make it accessible from the host machine.
-When you run `docker run {imageId}`, the application is running inside the container on port 3000, but your host system cannot reach it directly. To access it from your browser at `http://localhost:3000`, 
+- **(Answer)** This error occurs because Docker containers run in an isolated environment. In the Dockerfile, `EXPOSE 5173` only informs that the application inside the container will use port 5173, but it does not automatically make it accessible from the host machine.
+When you run `docker run {imageId}`, the application is running inside the container on port 3000, but your host system cannot reach it directly. To access it from your browser at `http://localhost:5173`, 
 
 ---
 
@@ -74,12 +74,20 @@ docker run -p <which PORT>:<Expose PORT> <imageId>
 
 ---
 ### Process state:
-- For Checking which process is running 
-- And How to stop
+- **For Checking which process is running** 
 ```
 docker ps
-docker stop <randomname>
 ```
+- **Result**
 
+| CONTAINER ID | IMAGE ID | COMMAND | CREATED | STATUS | PORTS | NAMES |
+|--------------|-------------|--------------|-------------|------------|------------|------------|
+| 5feefd9d375a | b82aff127418 | docker-entrypoint.s… | 19 seconds ago | Up 19 minutes | 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp | adoring_cohen |
+
+---
+- **And How to stop**
+```
+docker stop <NAMES>
+```
 ---
 
