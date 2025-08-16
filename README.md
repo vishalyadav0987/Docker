@@ -91,3 +91,15 @@ docker stop <NAMES>
 ```
 ---
 
+### 🏃 Running container in detached mode:
+- Detached Mode is useful for running application in background without stuck terminal at same point.
+- Detached Mode ka use application ko background me run karne ke liye hota hai, taaki terminal busy na ho.
+- Is mode me container background me run karta hai aur aapka terminal free rehta hai.
+
+```
+docker run -d -p 5173:5173 <imageId>
+```
+
+---
+
+
