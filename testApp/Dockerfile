@@ -30,8 +30,9 @@ RUN npm install
 
 
 
-EXPOSE 3000
+EXPOSE 5173
 # (Optional)
+#  Here we write coorect port ki hamara App kis PORT pe run kar raha hai
 
 
 
