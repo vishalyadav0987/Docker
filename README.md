@@ -192,4 +192,34 @@ adoring_cohen
 
 ---
 
+### 🗑️ Automatically removing a container when it is in the Exited state:
+- **These containers only run until they are stopped. If I stop one, it is automatically removed.**
+```
+docker run -d --rm -p 4000:5173 <imageId>
+```
+- **Result ✅**
+```
+80b50976e8cd81dbce4d03984284c3b991cfd56d343bbe9941389ad9ea358557
+```
+
+---
+
+### Naming the Containe:
+- By default, Docker gives containers a random name **(like adoring_cohen).**
+```
+docker run -d --rm --name "myWebApp" -p 4000:5173 <imageId>
+```
+- **Result ✅**
+```
+80b50976e8cd81dbce4d03984284c3b991cfd56d343bbe9941389ad9ea358557
+```
+- **With the help of the container name, we can remove the container.**
+```
+docker rm 'myWebApp'
+```
+- **Result ✅**
+```
+myWebApp
+```
+---
 
