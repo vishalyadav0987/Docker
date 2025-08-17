@@ -251,6 +251,7 @@ docker image ls
 
 
 - **If we create version 2 of that image [b82aff127418]:**
+- **Note:** jub tak koi change hum project me nh karegenge tab tak v2 of imageID same rahegi.
 ```
 docker build -t myfirstimage:02 .
 ```
@@ -280,6 +281,41 @@ docker rmi <repo_name>:<tag>
 - **Result ✅**
 ```
 Untagged: myfirstimage:02
+```
+
+---
+
+### 🆙 What if we update the Project:
+- **If we make any changes in the project files,**
+- **we do not need to change anything in the Dockerfile.**
+- **When we create version 2 of the project, it generates a new Image ID.**
+
+```
+docker build -t 'myfirstimage:02' .
+```
+- **Note:** It return New ImageID.
+
+- **Result ✅**
+```
+writing image sha256:d693416b93c8427ba8cafb40072b00733f075e15bbe9e413c1a0ad7c2b30c6ef 
+naming to docker.io/library/myfirstimage:02
+```
+
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
+|--------------|-------------|--------------|-------------|------------|
+| myfirstimage | 02 | d693416b93c8 (diff ID) | 46 seconds ago | 1.16GB |
+| myfirstimage | 01 | b82aff127418 | 14 hours ago | 1.16GB |
+
+
+**We also Created the container with REPOSITORY name instead of IMAGEID:**
+```
+docker run -d --rm --name "myWebApp02" -p 3000:5173 myfirstimage:02
+docker run -d --rm --name "myWebApp02" -p 3000:5173 <repo_name>:<tag>
+```
+
+- **Result ✅**
+```
+ef88c5f436afaeb870dc4a9c6d032912e8a8fc37e34fa6b16950a2508b59fc56
 ```
 
 ---
