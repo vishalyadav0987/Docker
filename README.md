@@ -204,7 +204,7 @@ docker run -d --rm -p 4000:5173 <imageId>
 
 ---
 
-### Naming the Containe:
+### Naming the Container:
 - By default, Docker gives containers a random name **(like adoring_cohen).**
 ```
 docker run -d --rm --name "myWebApp" -p 4000:5173 <imageId>
@@ -223,3 +223,63 @@ myWebApp
 ```
 ---
 
+### 🏹 Managing Docker Images
+- **Giving Name to the (image) repo and (taging) to the image:**
+```
+docker build -t myfirstimage:01 .
+docker build -t <repo_name>:<tag> .
+```
+
+- **Note(1):** . dot means jis directory me Dockerfile present hai.
+- **Note(2):** repository name must be lowercase.
+- **Result ✅**
+```
+writing image sha256:b82aff12741884d5716d5a9fa275a9f7a089d3f304d5ec208bf76907b02207f3
+naming to docker.io/library/myfirstimage:01
+```
+
+- **All Images:**
+```
+docker image ls
+```
+
+- **Result ✅**
+
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
+|--------------|-------------|--------------|-------------|------------|
+| myfirstimage | 01 | b82aff127418 | 14 hours ago | 1.16GB |
+
+
+- **If we create version 2 of that image [b82aff127418]:**
+```
+docker build -t myfirstimage:02 .
+```
+
+- **Result ✅**
+```
+writing image sha256:b82aff12741884d5716d5a9fa275a9f7a089d3f304d5ec208bf76907b02207f3
+naming to docker.io/library/myfirstimage:02
+```
+
+```
+docker image ls
+```
+
+- **Result ✅**
+
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
+|--------------|-------------|--------------|-------------|------------|
+| myfirstimage | 01 | b82aff127418 | 14 hours ago | 1.16GB |
+| myfirstimage | 02 | b82aff127418 | 14 hours ago | 1.16GB |
+
+**🗑️ For Deleting the image:**
+```
+docker rmi <repo_name>:<tag>
+```
+
+- **Result ✅**
+```
+Untagged: myfirstimage:02
+```
+
+---
