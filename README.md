@@ -537,3 +537,70 @@ docker volume inspect <volume_name>
     }
 ]
 ```
+---
+
+### 🗻 What are Bind Mounts:
+- Mount Bound is technique to changes in file also reflect in docker container, dont need again create the image of same project.
+
+- Bind mount ek technique hai jisme aap apne host system (local machine) ke kisi folder/file ko directly container ke andar mount karte ho. Isse host par jo bhi changes karte ho, wo turant container ke andar reflect hote hain.
+
+- ### Pros of Bind Mount:
+
+- **1. Live Suyc:**
+- Host aur container ke beech files/folders sync hote hain.
+- Matlab host par changes → turant container me reflect hote hain.
+
+- **2. No rebuild required:**
+- File ya code badalne ke liye nayi Docker image banane ki zarurat nahi hoti.
+
+- **3. Good for development:**
+- Coding aur debugging ke time best, kyunki aap local editor me kaam karte ho aur changes container me auto update ho jaate hain.
+
+- **4. Direct access to host files:**
+- Container directly host ke file system ke ek part ko use kar sakta hai.
+
+---
+
+- ### 1. Create Dockerfile
+
+- ### 2. Create Image
+```bash
+docker build -t <repo_name>:<tag> .
+docker build -t <ImageId> .
+```
+- ### 3. Create container
+```bash
+docker run --rm bind_mount_image:01
+```
+
+- **Result ✅**
+```
+File content:
+Vishal
+Bound
+Mount
+```
+
+- **Note:** ``When Create conatiner again it prints the same value that previos present in (file.txt) chahe hum nayi Value Add kar de file me. But for handling these situation we use (bind mount).``
+
+
+- ### 4. Bind Mount
+-  "/Users/vishalyadav/Desktop/My Collection/docker/bind_mount/file.txt"
+- /myapp/file.txt
+```bash
+docker run -v <relative_path_of_file>:<conatiner_file_path> --rm <ImageId>
+```
+
+- **Result ✅**
+```
+File content:
+
+Vishal
+Bound
+Mount
+topic
+Aur ye maine baad me add kiye after jub tak container ek bar run ho chuka hai
+```
+- **Note:** ``Here also we use (-v) for volume, but in this case we are not creating a local file for the container. Instead, the container’s file is bound with the machine’s file by giving a relative path.``
+
+
