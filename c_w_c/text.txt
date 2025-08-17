@@ -1,0 +1,5 @@
+Communocation With Conatiner
+
+1. Api ---> Conatiner
+2. Local Machine file / DB / ----> Conatiner
+3. DB Container ----> another Conatiner
