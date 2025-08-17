@@ -603,4 +603,39 @@ Aur ye maine baad me add kiye after jub tak container ek bar run ho chuka hai
 ```
 - **Note:** ``Here also we use (-v) for volume, but in this case we are not creating a local file for the container. Instead, the container’s file is bound with the machine’s file by giving a relative path.``
 
+---
+
+## Communication From/To Container
+
+### ✅ Type 1: Container communicates with the Internet / External APIs
+- The container sends a request to an external server (e.g., API on the internet).
+- The response comes back as data into the container.
+- (Example: a Python app inside container calling a public REST API).
+
+- **Note:** ``Normal work [jitna abhi tak karte aye wese hi hai]``
+
+![Home](./testApp/src/assets/img3.png)
+
+
+---
+
+### Type 2: Container communicates with the Host Machine / Local Services [DB]
+- The container connects to local resources such as databases, files, or services running on the host machine.
+- This often uses bind mounts, volumes, or network settings to make local resources accessible.
+- Example: containerized app reading/writing from a database running on your laptop.
+
+![Home](./testApp/src/assets/img4.png)
+
+---
+
+### ✅ Type 3: Communiaction between containers
+![Home](./testApp/src/assets/img5.png)
+
+``[PENDING COMMUNICATION TOPIC TYPE:2 AND TYPE:3]``
+
+---
+
+
+
+
 
