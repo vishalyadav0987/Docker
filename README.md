@@ -435,7 +435,7 @@ vishalyadav0987/demo-vite-app   02        d693416b93c8   About an hour ago   1.1
 ```
 - **Note:** Previous image bhi rheti jisko hamne new name se change means old and new are thier.
 
-### When we redeploy the jisko humne change [myfirstimage:02 vishalyadav0987/demo-vite-app:02]
+- ### When we redeploy the jisko humne change [myfirstimage:02 vishalyadav0987/demo-vite-app:02]
 ```bash
 docker push vishalyadav0987/demo-vite-app:02
 ```
