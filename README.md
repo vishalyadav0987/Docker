@@ -7,7 +7,7 @@
 ```
 docker build .
 ```
-- **Result**
+- **Result ✅**
 
 ```
 writing image sha256:163c56b07d4b80c15ed9025c276c3114df01d2fffba887ae 
@@ -74,7 +74,7 @@ docker run -p <which PORT>:<Expose PORT> <imageId>
 
 ---
 ### Process state:
-- **For Checking which process is running** 
+- **For Checking which process is running [The (docker ps) command only shows containers that are in the running state.]** 
 ```
 docker ps
 ```
@@ -153,3 +153,21 @@ docker run -d -p 4000:5173 b82aff127418
 - Running multiple containers from the same image can also help in **load balancing** for websites.
 
 ---
+
+### Process state status:
+- **The (docker ps -a) command shows all containers, including those in running, exited, and created states.**
+```
+docker ps -a
+```
+- **Result ✅**
+
+| CONTAINER ID | IMAGE ID | COMMAND | CREATED | STATUS | PORTS | NAMES |
+|--------------|-------------|--------------|-------------|------------|------------|------------|
+| ec9e210d867c | b82aff127418 | docker-entrypoint.s… | 12 hours ago | Created | 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp | adoring_cohen |
+| 912bf56e56e4 | b82aff127418 | docker-entrypoint.s… | 12 hours ago | Running | 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp | adoring_cohen |
+| 1b000d819425 | b82aff127418 | docker-entrypoint.s… | 12 hours ago | Running | 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp | adoring_cohen |
+| 5feefd9d375a | b82aff127418 | docker-entrypoint.s… | 13 hours ago | Exited | 0.0.0.0:5173->5173/tcp, [::]:5173->5173/tcp | adoring_cohen |
+
+---
+
+
