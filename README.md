@@ -460,3 +460,80 @@ f680c9b2c572: Layer already exists
 - **Note:** When we deploy the same image with a different tag but the same Image ID (no changes in the project), Docker links it to the image that was previously pushed and preseved the space.
 
 ---
+
+### 🔊 Docker Volume
+- Docker Volume ek storage hai jo container ke bahar data ko safe rakhta hai, taki container delete ya restart hone par bhi data na khoye aur multiple containers ke beech share ho sake.
+
+- **(Question) Why we use docker Volume?**
+- **(Answer) Because if you store file.txt inside a Docker container without a volume, the data will disappear when the container is removed. But if you mount a Docker volume, the file (and user list) will persist, since volumes are stored on the host system outside the container lifecycle.**
+- **👉 Basically, when you create a container, file.txt is created inside the container’s filesystem (not directly on your local system). If you want it to be created and persisted on your local system, you need to use a bind mount or a Docker volume.**
+- **⚡ Key distinction:**
+- **Without volume:** ``(file.txt)`` is only inside the container → lost if container is removed.
+- **With Docker volume or bind mount:** ``(file.txt)`` is stored locally on your host system → persists across containers.
+
+---
+
+- ### 1. Create Dockerfile
+
+- ### 2. Create Image
+```bash
+docker build -t <repo_name>:tag .
+docker build -t <ImageId> .
+```
+
+- ### 3. Open in Interactive Mode ``(becuase program takes input)``
+```bash
+docker run -it --rm --name "mypythonapp" <repo_name>:<tag> .
+docker run -it --rm --name "mypythonapp" <ImageId> .
+```
+- **Note:** ``(All Interective mode program stops automatically when it excution is complete. That's why here using --rm for automatically remove or delete container. If container is remove jo **name** humne saved kiya tha container woh bhi removed comman sense.)``
+
+**Note:** ``Program ka kaam hai har bar user ka input le aur file me saved previous + current and print on user say yes.``
+
+- **Note:** ``That's why we need local file jo conatiner ko data ko saved kare sake. Isliye hum docker volume use karte hai.``
+
+
+- ### 4. Open in Interactive Mode with Create Volume ``(How to create Volume)``
+```bash
+docker run -it --rm -v <volume_name>:/<local_work_directory_name>/ ImageId
+docker run -it --rm -v myvolume:/myapp/ docker_volume_understanding:latest
+```
+
+**Note:** ``After Execution complete here also container remove but here we create docker volume name as myvolume that created local file in WOKRDIR. It shareable between all the containers.``
+
+---
+
+### Imp Command for Docker Volume:
+- **Command 1**
+
+```bash
+docker volume ls
+```
+
+- **Result ✅**
+
+| DRIVER | VOLUME NAME | 
+|--------------|-------------|
+| local | myvolume |
+
+
+- **Command 2**
+
+```bash
+docker volume inspect <volume_name>
+```
+
+- **Result ✅**
+```
+[
+    {
+        "CreatedAt": "2025-08-17T11:06:17Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/myvolume/_data",
+        "Name": "myvolume",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
