@@ -418,3 +418,45 @@ docker pull vishalyadav0987/demo-vite-app:01
 
 ---
 
+### 🚋 Rename the Docker image:
+
+```bash
+docker tag myfirstimage:02 vishalyadav0987/demo-vite-app:02
+docker tag <old_name>:<tag> <new_name>:<tag>
+```
+
+- **Result ✅**
+```
+REPOSITORY                      TAG       IMAGE ID       CREATED             SIZE
+vishalyadav0987/demo-vite-app   01        c867216650b0   12 minutes ago      1.16GB
+python_intractive_mode          latest    be96c04e51f2   55 minutes ago      1.12GB
+myfirstimage                    02        d693416b93c8   About an hour ago   1.16GB
+vishalyadav0987/demo-vite-app   02        d693416b93c8   About an hour ago   1.16GB
+```
+- **Note:** Previous image bhi rheti jisko hamne new name se change means old and new are thier.
+
+### When we redeploy the jisko humne change [myfirstimage:02 vishalyadav0987/demo-vite-app:02]
+```bash
+docker push vishalyadav0987/demo-vite-app:02
+```
+
+
+- **Result ✅**
+```
+34799c5eb741: Pushed 
+3aba3f582bb5: Pushed 
+5315b464fef5: Layer already exists 
+bd393a05bfb5: Layer already exists 
+7fd2629d59f2: Layer already exists 
+0413d3169966: Layer already exists 
+a1482e066328: Layer already exists 
+936d81443473: Layer already exists 
+61a723bcedf7: Layer already exists 
+f680c9b2c572: Layer already exists 
+563cc2194f6b: Layer already exists 
+02: digest: sha256:c04173478dc8f752ec7b1904f4b921f1021e9b13dfd0ffc1c27780998e7abf49 size: 2631
+```
+
+- **Note:** When we deploy the same image with a different tag but the same Image ID (no changes in the project), Docker links it to the image that was previously pushed and preseved the space.
+
+---
