@@ -374,3 +374,47 @@ Enter the 1st number: 4
 Enter the 1st number: 5
 Sum of 4 + 5 =  9
 ```
+
+---
+
+### 👥 Sharing Images to the DOCKER HUB:
+![Home](./testApp/src/assets/img.png)
+
+- #### **[Developer]** ----> **[IMAGE]** ----> **[Tester]**
+- #### **We push the image to the Docker registry on Docker Hub.**
+- #### **[Developer]** ----> **[Dockerfile]** ----> **[IMAGE]** ----> **[DockerHub]** ----> **[Tester]**
+![Home](./testApp/src/assets/img2.png)
+
+---
+
+### **Step 1: Build the Docker image**
+
+Create the image with the same name and tag as your Docker Hub repository:
+
+```bash
+docker build -t vishalyadav0987/demo-vite-app:01 .
+```
+
+---
+
+### **Step 2: Push the image to Docker Hub**
+
+After building, push the image to your Docker Hub repository:
+
+```bash
+docker push vishalyadav0987/demo-vite-app:01
+```
+
+---
+
+👉 This way, the image `vishalyadav0987/demo-vite-app:01` will be available on Docker Hub under your account.
+
+
+- **Result ✅**
+
+```bash
+docker pull vishalyadav0987/demo-vite-app:01
+```
+
+---
+
