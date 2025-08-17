@@ -319,3 +319,13 @@ ef88c5f436afaeb870dc4a9c6d032912e8a8fc37e34fa6b16950a2508b59fc56
 ```
 
 ---
+
+### 📒 Pre-Defined Docker images:
+-**Fetch Predefined images that are present on DOCKER HUB:**
+```
+docker pull python
+docker pull nginx
+```
+
+---
+
