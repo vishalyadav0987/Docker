@@ -170,4 +170,26 @@ docker ps -a
 
 ---
 
+### 🗑️ Removing Docker containers that are in the **(Created)** or **(Exited)** state:
+- **Removing a (single) Docker container in Created or Exited state:**
+```
+docker rm <Names>
+```
+- **Result ✅**
+```
+admiring_raman
+```
+- **Removing a (multiple) Docker container in Created or Exited state:**
+```
+docker rm <Names> <Names> <Names> <Names>....
+```
+- **Result ✅**
+```
+brave_haibt
+boring_rubin
+adoring_cohen
+```
+
+---
+
 
