@@ -321,7 +321,7 @@ ef88c5f436afaeb870dc4a9c6d032912e8a8fc37e34fa6b16950a2508b59fc56
 ---
 
 ### 📒 Pre-Defined Docker images:
--**Fetch Predefined images that are present on DOCKER HUB:**
+- **Fetch Predefined images that are present on DOCKER HUB:**
 ```
 docker pull python
 docker pull nginx
@@ -329,3 +329,48 @@ docker pull nginx
 
 ---
 
+### 💻 Docker container with Interactive Mode:
+- **For interactive mode, we create a Python program to calculate the sum of two numbers.**
+
+```
+docker build -t "python_intractive_mode" .
+```
+- **Result ✅**
+```
+writing image sha256:be96c04e51f2cf134cbce21534846a5d9a3b57c040ad6ac5fd73b70289d75032
+docker.io/library/python_intractive_mode
+```
+
+| REPOSITORY | TAG | IMAGE ID | CREATED | SIZE |
+|--------------|-------------|--------------|-------------|------------|
+| python_intractive_mode | latest | be96c04e51f2 | 2 minutes ago | 1.12GB |
+
+
+- **(Question) What happen when create container for python program ?**
+- **Command:** (docker run  python_intractive_mode:latest)
+- **(Answer) It throws an error because the Python program is waiting for input. To fix this, we need to run the container in interactive mode.** 
+
+```
+docker run  python_intractive_mode:latest
+```
+- **Result ❌**
+```
+Enter the 1st number: Traceback (most recent call last):
+  File "/myapp/sum.py", line 1, in <module>
+    a = int(input("Enter the 1st number: "));
+            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
+```
+
+- **We use the (-it) option to run the container in interactive mode, which allows us to provide input to the Python program.**
+```
+docker run -it be96c04e51f2
+docker run  python_intractive_mode:latest
+```
+
+- **Result ✅**
+```
+Enter the 1st number: 4
+Enter the 1st number: 5
+Sum of 4 + 5 =  9
+```
