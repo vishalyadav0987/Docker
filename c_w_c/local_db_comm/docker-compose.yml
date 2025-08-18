@@ -1,0 +1,7 @@
+services:
+  mongodb-atlas:
+    image: mongodb/mongodb-atlas-local:latest
+    # environment:
+    #   - MONGO_URI=mongodb://atlas-local:27017/testdb
+    container_name: "atlas-local"
+

@@ -792,5 +792,49 @@ It work Server runnning.
 ![Home](./testApp/src/assets/img7.png)
 ---
 
+## ⚔️ Docker Composer
+- **1. Docker composer is configuration file to manage multiple or single container running on same machine.**
+- **2. Basically, it is a single ``yml`` file that contains the configuration for the services.**
+- **3. Hume puri query likhne ki jarurat nh hai baar hum apne container ki saari configuration ek hi file me likh dete hai.**
+
+###  yml for Single Container
+- Phle hum mongodb-atlas ke liye kar rhe hai
+```bash
+  docker run -d --rm -p 27017:27017 --name atlas-local --network my-net mongodb/mongodb-atlas-local:latest 
+```
+- ✅ Required if have ``yml file``
+- ❌ not Required if have ``yml file``
 
 
+- **``-d``** for deteched Mode. ✅
+- **``--rm``** for automatically remove container when it's stop. ❌
+- **``-p``** for port binding.
+- **``--name``** for container name. ❌
+- **``--network``** for same network. ❌
+- **``mongodb/mongodb-atlas-local:latest``** image name for run or create container. ❌
+
+
+- For run the yml file:
+```bash
+  docker-compose up 
+```
+- **Note:** It will create ``Image`` and ``Container``.
+
+- For run the yml file:
+```bash
+  docker-compose up -d
+```
+- **Note:** It will create ``Image`` and ``Container`` also run container in deteched mode.
+
+- For stop conatiner:
+```bash
+  docker-compose down 
+```
+-  **Result ✅**
+```
+[+] Running 2/2
+ ✔ Container atlas-local          Removed         
+ ✔ Network local_db_comm_default  Removed
+```
+
+- **Note:** When container stop the container will automatically removed.
