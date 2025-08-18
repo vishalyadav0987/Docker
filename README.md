@@ -626,14 +626,94 @@ Aur ye maine baad me add kiye after jub tak container ek bar run ho chuka hai
 
 ![Home](./testApp/src/assets/img4.png)
 
+
+- **For Exaplation we using nodejs and mongoDB campuss**
+- 1. create Dockerfile
+- 2. create image
+```bash
+docker build -t local_db_image:01 .
+```
+- 3. Change Mongo uri ``mongodb://host.docker.internal:27017/testdb``
+- 4. create conatiner and run in detached mode, port binding on 3000
+```bash
+docker run -d --rm -p 3000:5000  local_db_image:01
+```
+- **Result ✅**
+```
+Without detached Mode:
+Server running on port 5000
+Connected to MongoDB on host machine!
+```
+
+- **Result ✅**
+![Home](./testApp/src/assets/img6.png)
+
+
 ---
 
 ### ✅ Type 3: Communiaction between containers
 ![Home](./testApp/src/assets/img5.png)
 
-``[PENDING COMMUNICATION TOPIC TYPE:2 AND TYPE:3]``
+- What is done here, Here we connected MOGODB ATLAS local container communicate with another conatiner that connect altas container to server we created in. another conatiner.
+
+- **Steps:**
+- 1. pull mogodb altas image from docker hub.
+```bash
+docker pull mongodb/mongodb-atlas-local:latest
+```
+
+2. inspect the mongo atlas and get ip of that conatiner
+```
+docker inspect  mongodb/mongodb-atlas-local:latest
+```
+- **Result ✅**
+```
+"Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "92:07:26:3a:f7:61",
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "2ae89fedb58bcff161d093d8b431e10f5a7e50e29f69ad4e65759390639eac8c",
+                    "EndpointID": "95bbe74ef130d4775801bddc0baa873f6103bee14fc98575b2ad90e45d11aa9f",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+```
+
+- 4. Change the Mongo uri to conatiner IP "mongodb://172.17.0.2:27017/testdb
+- 5. Then Run the mongo image in detached mode
+```
+docker run -d --rm -p 27017:27017 --name atlas-local db_conatiner:latest
+```
+- 6. After Changing URI in file ``local_db.js``
+- 7. We again create new docker images name as ``db_container:latest``
+- 8. create conatiner and run in detached mode, port binding on 3000
+```bash
+docker run -d --rm -p 3000:5000  db_container:latest
+```
+- **Result ✅**
+```
+Without detached Mode:
+Server running on port 5000
+Connected to MongoDB on host machine!
+```
+
+- **Result ✅**
+![Home](./testApp/src/assets/img6.png)
+
 
 ---
+
+## Docker Network
 
 
 
