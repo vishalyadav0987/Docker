@@ -797,7 +797,7 @@ It work Server runnning.
 - **2. Basically, it is a single ``yml`` file that contains the configuration for the services.**
 - **3. Hume puri query likhne ki jarurat nh hai baar hum apne container ki saari configuration ek hi file me likh dete hai.**
 
-###  yml for Single Container
+###  yml for Single Container Configuration
 - Phle hum mongodb-atlas ke liye kar rhe hai
 ```bash
   docker run -d --rm -p 27017:27017 --name atlas-local --network my-net mongodb/mongodb-atlas-local:latest 
@@ -838,3 +838,76 @@ It work Server runnning.
 ```
 
 - **Note:** When container stop the container will automatically removed.
+
+---
+
+
+You’re close, but the wording and explanation can be made **clearer and more professional**. Here’s a polished version:
+
+---
+
+### **Docker Compose for Multiple Containers**
+
+* When running multiple containers, you can use the **`depends_on`** field in the `docker-compose.yml` file.
+* It tells Docker that **one container should wait for another container to start** before it runs.
+* This is useful when, for example, your Node.js app should wait for a database container to be ready.
+
+**Example command to run a specific service:**
+
+```bash
+docker-compose run my-js-server
+```
+
+**Result ✅**
+```
+```
+* This runs the `my-js-server` container and respects the dependencies defined in `depends_on`.
+
+---
+
+
+## ⚔️ Docker Compose with Network
+
+* When using a `docker-compose.yml` for multiple containers, **Docker automatically creates a default network** for those containers.
+* This means you **don’t need to manually create a network**; all services in the Compose file can communicate with each other using their **service names**.
+
+
+* When using a docker-compose.yml file, Docker automatically creates a default network for the services. The default network name usually follows the pattern:
+**Result ✅**
+```
+[+] Creating 2/2
+✔ Network local_db_comm_default  Created 
+✔ Container atlas-local          Created
+```
+```
+<project_name>_default
+```
+Example: ``local_db_comm_default.``
+
+**Result ✅**
+```
+✔ Network local_db_comm_my-network  Created
+```
+* You can also define your own custom network in the YAML file and attach multiple containers to it for controlled communication.
+
+For Remove Everthing means - network,volume etc.
+```
+docker down -v
+```
+---
+
+### **Docker Compose with volume**
+
+
+![Home](./testApp/src/assets/img8.png)
+
+``Done ✅``
+
+---
+
+
+
+
+
+
+
