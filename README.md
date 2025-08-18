@@ -691,8 +691,8 @@ docker inspect  mongodb/mongodb-atlas-local:latest
 
 - 4. Change the Mongo uri to conatiner IP "mongodb://172.17.0.2:27017/testdb
 - 5. Then Run the mongo image in detached mode
-```
-docker run -d --rm -p 27017:27017 --name atlas-local db_conatiner:latest
+```bash
+docker run -d --rm -p 27017:27017 --name atlas-local mongodb/mongodb-atlas-local:latest
 ```
 - 6. After Changing URI in file ``local_db.js``
 - 7. We again create new docker images name as ``db_container:latest``
@@ -714,8 +714,83 @@ Connected to MongoDB on host machine!
 ---
 
 ## Docker Network
+### **container-to-container communication without using a Docker network**.
+
+### **Cons / Problems**
+
+1. **IP instability**
+   * Containers get **dynamic IPs** from Docker’s default bridge network.
+   * If you use `container IP` to communicate, it may **change every time the container restarts**, breaking the connection.
+
+2. **No automatic DNS**
+
+   * Without a user-defined network, containers **cannot resolve each other by name**.
+   * You’d need to manually figure out IPs or use host networking, which is messy.
+
+3. **Hard to scale**
+
+   * If you want multiple instances of a service (e.g., multiple Node.js or MongoDB containers), managing IPs manually becomes impossible.
+
+4. **Security**
+
+   * Default bridge network exposes all containers on the same network by default.
+   * You cannot isolate communication easily between only certain containers.
+
+5. **Complexity for orchestration**
+
+   * Docker Compose or Kubernetes relies on networks for service discovery.
+   * Without networks, it’s difficult to automate, restart, or scale containers reliably.
 
 
+✅ **Summary:**
+
+* Using **bare IPs without networks** is fragile, non-scalable, and hard to maintain.
+* Using **Docker networks** is the standard best practice—it provides **stable DNS, isolation, and reliability**.
+
+- ✅ **Note:** ``Always we start mongo-db-atlas container after getting Ip then need to change in js file then again create image of that. Ishme (Without Network communication between Container to container) kya hota tha hume wait karna padta again image banana pdata tha.``
+
+### ✅ Solution:Important
+- Create a Docker network, ``my-net``.
+- Connect both containers to the same network so they can communicate using container names instead of IPs.
+
+### ✅ Steps:
+**1. Create network**
+```bash
+  docker network create my-net
+  docker network create <network-name>
+ ```
+  -  **Result ✅**
+  ```
+  06792af400af5295495f536649c321a3baaaba66503bc8d2cefa9586f1e9fe89
+  ```
+
+**2. Then Run the mongo conatiner in detached mode in same network ``my-net``**
+```bash
+docker run -d --rm -p 27017:27017 --name atlas-local --network my-net mongodb/mongodb-atlas-local:latest
+```
+-  **Result ✅**
+```
+0c16edd6ddb8f8d198bf9dd1bbb502bf9061b176b7f0c7887f75b0d315107ed4
+```
+
+**3. Change the Mongo uri to conatiner name ``atlas-local``**
+
+**4. After done change in js create new image name as ``docker_network_image``**
+
+**5. Run and create Conatiner of that image ``docker_network_image`` in same network ``my-net``.**
+```bash
+docker run -d --rm --network my-net -p 3000:5000 docker_network_image:latest
+```
+
+-  **Result ✅**
+```
+6d77427955294a395a7b0fb81279906138a5d132eb521fe5572faca871f1feed
+It work Server runnning.
+```
+
+
+![Home](./testApp/src/assets/img7.png)
+---
 
 
 
