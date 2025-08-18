@@ -1,7 +1,33 @@
 services:
-  mongodb-atlas:
+  mongodb-atlas:  # Container 1
     image: mongodb/mongodb-atlas-local:latest
-    # environment:
-    #   - MONGO_URI=mongodb://atlas-local:27017/testdb
     container_name: "atlas-local"
+    networks:
+      - my-network
+    ports:
+      - "27017:27017"
+    # environment:
+      # - name=value
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
+  my-js-server:  # Container 2
+    build: ./  # Path where Dockerfile is present
+    container_name: myjsserver
+    networks:
+      - my-network
+    volumes:
+      - ./file.txt:/myapp/file.txt
+    depends_on:
+      mongodb-atlas:
+        condition: service_healthy  # Wait until MongoDB is healthy
+    # stdin_open: true # when we are interactive mode
+    # tty: true # when we are interactive mode
+    ports:
+      - "5000:5000"  # Optional, for your Node.js app
+
+networks:
+  my-network:
