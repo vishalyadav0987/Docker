@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB on host machine
-mongoose.connect("mongodb://172.17.0.2:27017/testdb", {
+mongoose.connect("mongodb://atlas-local:27017/testdb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
